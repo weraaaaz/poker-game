@@ -22,10 +22,7 @@ main() {
     });
     test('should deal 5 cards for each player', () {
       startGame(store);
-      store.dispatch(DealCards(5));
-      store.dispatch(ChangePlayer());
-      store.dispatch(DealCards(5));
-      store.dispatch(ChangePlayer());
+      dealInitialCards(store);
       expect(store.state.player1.hand.cards.length, 5);
       expect(store.state.player2.hand.cards.length, 5);
       expect(store.state.deck.cards.length, 42);
@@ -37,10 +34,7 @@ main() {
     });
     test('should replace player1 all 5 cards and player2 0 cards', () {
       startGame(store);
-      store.dispatch(DealCards(5));
-      store.dispatch(ChangePlayer());
-      store.dispatch(DealCards(5));
-      store.dispatch(ChangePlayer());
+      dealInitialCards(store);
       List<CardModel> previousCardsPlayer1 = store.state.player1.hand.cards;  
       List<CardModel> previousCardsPlayer2 = store.state.player2.hand.cards;  
       store.dispatch(RemoveFromPlayerHand(store.state.player1.hand.cards));
@@ -79,9 +73,9 @@ main() {
           CardModel(rank: 5, suit: Suit.hearts),
         ],
       ));
-      expect(player1.hand.getHandScore() == 3, isTrue);
+      expect(player1.hand.getHandScoreName().index == 3, isTrue);
       expect(player1.hand.getRepeatedRanksMaxIndex() == 2, isTrue);
-      expect(player2.hand.getHandScore() == 3, isTrue);
+      expect(player2.hand.getHandScoreName().index == 3, isTrue);
       expect(player2.hand.getRepeatedRanksMaxIndex() == 3, isTrue);
       player1 = Player(hand: Hand(
         cards: [
@@ -101,9 +95,9 @@ main() {
           CardModel(rank: 5, suit: Suit.clubs),
         ],
       ));
-      expect(player1.hand.getHandScore() == 4, isTrue);
+      expect(player1.hand.getHandScoreName().index == 4, isTrue);
       expect(player1.hand.getRepeatedRanksMaxIndex() == 2, isTrue);
-      expect(player2.hand.getHandScore() == 0, isTrue);
+      expect(player2.hand.getHandScoreName().index == 0, isTrue);
       player1 = Player(hand: Hand(
         cards: [
           CardModel(rank: 2, suit: Suit.clubs),
@@ -113,7 +107,7 @@ main() {
           CardModel(rank: 13, suit: Suit.hearts),
         ],
       ));
-      expect(player1.hand.getHandScore() == 5, isTrue);
+      expect(player1.hand.getHandScoreName().index == 5, isTrue);
       expect(player1.hand.getRepeatedRanksMaxIndex() == 2, isTrue);
       player1 = Player(hand: Hand(
         cards: [
@@ -124,7 +118,7 @@ main() {
           CardModel(rank: 14, suit: Suit.clubs),
         ],
       ));
-      expect(player1.hand.getHandScore() == 6, isTrue);
+      expect(player1.hand.getHandScoreName().index == 6, isTrue);
       player1 = Player(hand: Hand(
         cards: [
           CardModel(rank: 12, suit: Suit.clubs),
@@ -134,7 +128,7 @@ main() {
           CardModel(rank: 3, suit: Suit.clubs),
         ],
       ));
-      expect(player1.hand.getHandScore() == 1, isTrue);
+      expect(player1.hand.getHandScoreName().index == 1, isTrue);
       expect(player1.hand.getRepeatedRanksMaxIndex() == 12, isTrue);
       player1 = Player(hand: Hand(
         cards: [
@@ -145,16 +139,13 @@ main() {
           CardModel(rank: 12, suit: Suit.hearts),
         ],
       ));
-      expect(player1.hand.getHandScore() == 2, isTrue);
+      expect(player1.hand.getHandScoreName().index == 2, isTrue);
       expect(player1.hand.getRepeatedRanksMaxIndex() == 12, isTrue);
       startGame(store);
-      store.dispatch(DealCards(5));
-      store.dispatch(ChangePlayer());
-      store.dispatch(DealCards(5));
-      store.dispatch(ChangePlayer());
+      dealInitialCards(store);
       store.dispatch(ChooseWinner());
-      print(store.state.player1.hand.getHandScore());
-      print(store.state.player2.hand.getHandScore());
+      print(store.state.player1.hand.getHandScoreName());
+      print(store.state.player2.hand.getHandScoreName());
       print(store.state.winner == store.state.player1);
     });
   });

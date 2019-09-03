@@ -45,32 +45,32 @@ class Hand {
     return repeatedRanks;
   }
 
-  int getHandScore() {
+  HandName getHandScoreName() {
     if (_hasRepeatedElements()) {
       var repeatedRanks = _getRepeatedRanks(_getRanks());
       if (repeatedRanks.length == 1) {
-        return 1;
+        return HandName.pair;
       }
       if (repeatedRanks.length == 2) {
         if (repeatedRanks.toSet().length == repeatedRanks.length) {
-          return 2;
-        } else return 3;
+          return HandName.twoPairs;
+        } else return HandName.threeOfAKind;
       }
       if (repeatedRanks.length == 3) {
         if (repeatedRanks.toSet().length == 1) {
-          return 4;
-        } else return 5;
+          return HandName.fourOfAKind;
+        } else return HandName.fullHouse;
       }
     }
     if (_isPoker()) {
-      return 6;
+      return HandName.poker;
     }
-    return 0;
+    return HandName.none;
   }
 
   int getRepeatedRanksMaxIndex() {
     if (_hasRepeatedElements()) {
-      if (getHandScore() != 5) {
+      if (getHandScoreName() != HandName.fullHouse) {
         return _getRepeatedRanks(_getRanks()).reduce(max);
       } else return _getRepeatedRanks(_getRanks())[0];
     }
@@ -79,10 +79,11 @@ class Hand {
 }
 
 enum HandName {
-  poker,
-  fullHouse,
-  fourOfAKind,
-  threeOfAKind,
+  none,
+  pair,
   twoPairs,
-  pair
+  threeOfAKind,
+  fourOfAKind,
+  fullHouse,
+  poker
 }

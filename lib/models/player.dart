@@ -7,15 +7,13 @@ import 'models.dart';
 class Player {
   final Hand hand;
   final bool isCurrentPlayer;
+  final String name;
 
   Player({
     this.hand = const Hand(),
-    this.isCurrentPlayer = false
+    this.isCurrentPlayer = false,
+    this.name = '',
   });
-
-  // set currentPlayer(bool isCurrentPlayer) {
-  //   this.isCurrentPlayer = isCurrentPlayer;
-  // }
 
 }
 

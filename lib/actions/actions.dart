@@ -26,6 +26,14 @@ class RemoveFromPlayerHand {
   );
 }
 
+class ToggleSelectCard {
+  final CardModel card;
+
+  ToggleSelectCard(
+    this.card
+  );
+}
+
 class ChooseWinner {
 
 }
@@ -34,13 +42,11 @@ startGame(Store<AppState> store) {
   store.dispatch(StartGame());
 }
 
-dealCards() {
-  return (Store<AppState> store) {
-    store.dispatch(DealCards(5));
-    store.dispatch(ChangePlayer());
-    store.dispatch(DealCards(5));
-    store.dispatch(ChangePlayer());
-  };
+dealInitialCards(Store<AppState> store) {
+  store.dispatch(DealCards(5));
+  store.dispatch(ChangePlayer());
+  store.dispatch(DealCards(5));
+  store.dispatch(ChangePlayer());
 }
 
 replaceCards(List<CardModel> cards) {
