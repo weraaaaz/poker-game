@@ -10,28 +10,28 @@ class CardWidget extends StatelessWidget {
   final bool isVisible;
   final bool isHighlighted;
 
-  CardWidget(
-    this.rank,
-    this.suit,
-    this.onPressed,
-    this.isVisible,
-    this.isHighlighted
-  );
+  const CardWidget({
+    @required this.rank,
+    @required this.suit,
+    @required this.onPressed,
+    this.isVisible = false,
+    this.isHighlighted = false
+  });
 
   @override
   Widget build(BuildContext context) {
     var suitIcon;
     var suitIconStyle = appTheme.cardSuitBlack;
-    switch (this.suit.toString()){
-      case "Suit.hearts":
+    switch (this.suit){
+      case Suit.hearts:
         suitIcon = '\u2665';
         suitIconStyle = appTheme.cardSuitRed;
         break;
-      case "Suit.diamonds":
+      case Suit.diamonds:
         suitIcon = '\u2666';
         suitIconStyle = appTheme.cardSuitRed;
         break;
-      case "Suit.clubs":
+      case Suit.clubs:
         suitIcon = '\u2663';
         break;
       default:
@@ -39,12 +39,12 @@ class CardWidget extends StatelessWidget {
     }
     return Card(
       margin: const EdgeInsets.all(5),
-      shape: isHighlighted ? new RoundedRectangleBorder(
-        side: new BorderSide(color: appTheme.primaryGreen, width: 2.0),
-        borderRadius: BorderRadius.circular(4.0)
-      ) : new RoundedRectangleBorder(
-        side: new BorderSide(color: Colors.white, width: 2.0),
-        borderRadius: BorderRadius.circular(4.0)
+      shape: isHighlighted ? RoundedRectangleBorder(
+        side: BorderSide(color: appTheme.primaryGreen, width: 2),
+        borderRadius: BorderRadius.circular(4)
+      ) : RoundedRectangleBorder(
+        side: BorderSide(color: Colors.white, width: 2),
+        borderRadius: BorderRadius.circular(4)
       ),
       child: GestureDetector(
         onTap: () {
@@ -53,7 +53,8 @@ class CardWidget extends StatelessWidget {
         child: Container(
           width: 60,
           height: 90,
-          padding: EdgeInsets.all(5),
+          color: this.isVisible ? Colors.white : Colors.black38,
+          padding: const EdgeInsets.all(5),
           child: this.isVisible ? Column(
             children: <Widget>[
               Text(

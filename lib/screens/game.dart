@@ -37,11 +37,11 @@ class _GamePageState extends State<GamePage> {
                 Column(
                   children: currentCards.map<Widget>((card) {
                     return CardWidget(
-                      card.rank,
-                      card.suit,
-                      areCardsVisible && canSwapCards ? () { dispatch(ToggleSelectCard(card)); } : () {},
-                      areCardsVisible,
-                      cardsToSwap.contains(card)
+                      rank: card.rank,
+                      suit: card.suit,
+                      onPressed: areCardsVisible && canSwapCards ? () { dispatch(ToggleSelectCard(card)); } : () {},
+                      isVisible: areCardsVisible,
+                      isHighlighted: cardsToSwap.contains(card)
                     );
                   }).toList()
                 ),
@@ -63,8 +63,7 @@ class _GamePageState extends State<GamePage> {
                 ),
                 if (areCardsVisible && canSwapCards) RaisedButton(
                   onPressed: () {
-                    dispatch(RemoveFromPlayerHand(cardsToSwap));
-                    dispatch(DealCards(cardsToSwap.length));
+                    replaceCards(store, cardsToSwap);
                     setState(() {
                       canSwapCards = false;
                     });

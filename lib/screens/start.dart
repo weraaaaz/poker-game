@@ -22,32 +22,30 @@ class StartPage extends StatelessWidget {
                 if (winner != null) Column(
                   children: <Widget>[
                     Text(
-                      '${state.player1.name} - ${state.player1.hand.getHandScoreName()}'
+                      '${state.player1.name} - ${state.player1.hand.getHandScoreName().toString().split('.')[1]}'
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: store.state.player1.hand.cards.map<Widget>((card) {
                         return CardWidget(
-                          card.rank,
-                          card.suit,
-                          () {},
-                          true,
-                          false,
+                          rank: card.rank,
+                          suit: card.suit,
+                          onPressed: () {},
+                          isVisible: true,
                         );
                       }).toList()
                     ),
                     Text(
-                      '${state.player2.name} - ${state.player2.hand.getHandScoreName()}'
+                      '${state.player2.name} - ${state.player2.hand.getHandScoreName().toString().split('.')[1]}'
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: store.state.player2.hand.cards.map<Widget>((card) {
                         return CardWidget(
-                          card.rank,
-                          card.suit,
-                          () {},
-                          true,
-                          false,
+                          rank: card.rank,
+                          suit: card.suit,
+                          onPressed: () {},
+                          isVisible: true,
                         );
                       }).toList()
                     ),

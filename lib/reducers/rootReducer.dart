@@ -25,18 +25,11 @@ AppState rootReducer(AppState state, action){
     return toggleSelectCard(state, action);
   }
   return state;
-//  try {
-//    print('state');
-//    return action.reducer(state);
-//  } catch(e){
-//    print('Error: $e');
-//    return state;
-//  }
 }
 
 AppState startGame(AppState state) {
   return state.copyWith(
-    deck: DeckModel.initial(),
+    deck: DeckModel().initial(),
     player1: Player(hand: Hand(), isCurrentPlayer: true, name: "Player 1"),
     player2: Player(hand: Hand(), isCurrentPlayer: false, name: "Player 2"),
     currentPlayer: state.player1,
@@ -63,11 +56,9 @@ AppState dealCards(AppState state, DealCards action) {
 }
 
 AppState changePlayer(AppState state) {
-  var player1 = state.player1;
-  var player2 = state.player2;
   return state.copyWith(
-    player1: Player(hand: player1.hand, isCurrentPlayer: !player1.isCurrentPlayer, name: player1.name),
-    player2: Player(hand: player2.hand, isCurrentPlayer: !player2.isCurrentPlayer, name: player2.name),
+    player1: state.player1.copyWith(isCurrentPlayer: !state.player1.isCurrentPlayer),
+    player2: state.player2.copyWith(isCurrentPlayer: !state.player2.isCurrentPlayer),
   );
 }
 

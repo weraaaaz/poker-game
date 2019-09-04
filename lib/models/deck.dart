@@ -8,7 +8,7 @@ class DeckModel {
 
   DeckModel({ this.cards });
 
-  factory DeckModel.initial() {
+  initial() {
     final List<CardModel> cards = [];
     for (int rank = 2; rank <= 14; rank++) {
       Suit.values.forEach(

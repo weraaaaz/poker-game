@@ -49,10 +49,7 @@ dealInitialCards(Store<AppState> store) {
   store.dispatch(ChangePlayer());
 }
 
-replaceCards(List<CardModel> cards) {
-  return (Store<AppState> store) {
-    store.dispatch(RemoveFromPlayerHand(cards));
-    store.dispatch(DealCards(cards.length));
-    store.dispatch(ChangePlayer());
-  };
+replaceCards(Store<AppState> store, List<CardModel> cards) {
+  store.dispatch(RemoveFromPlayerHand(cards));
+  store.dispatch(DealCards(cards.length));
 }

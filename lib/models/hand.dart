@@ -9,6 +9,14 @@ class Hand {
 
   const Hand({ this.cards = const [] }); 
 
+  Hand copyWith({
+    List<CardModel> cards
+  }) {
+    return Hand(
+      cards: cards ?? this.cards
+    );
+  }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.cards != null) {
@@ -20,34 +28,18 @@ class Hand {
   String toString() => this.toJson().toString();
 
   List<int> _getRanks() {
-    var ranks = List<int>();
-    this.cards.forEach((card) => ranks.add(card.rank));
-    return ranks;
-  }
-  
-  List<Suit> _getSuits() {
-    var suits = List<Suit>();
-    this.cards.forEach((card) => suits.add(card.suit));
-    return suits;
-  }
-
-  bool _isPoker() {
-    return _getSuits().toSet().length == 1 && this.cards.every((card) => card.rank >= 10 && card.rank <= 14);
-  }
-
-  bool _hasRepeatedElements() {
-    return _getRanks().toSet().length != 5;
+    return this.cards.map((card) => card.rank).toList();
   }
 
   List<int> _getRepeatedRanks(List<int> ranks) {
-    var repeatedRanks = ranks;
+    var repeatedRanks = ranks.toList();
     ranks.toSet().forEach((rank) => repeatedRanks.remove(rank));
     return repeatedRanks;
   }
 
   HandName getHandScoreName() {
-    if (_hasRepeatedElements()) {
-      var repeatedRanks = _getRepeatedRanks(_getRanks());
+    var repeatedRanks = _getRepeatedRanks(_getRanks());
+    if (repeatedRanks.length > 0) {
       if (repeatedRanks.length == 1) {
         return HandName.pair;
       }
@@ -62,17 +54,18 @@ class Hand {
         } else return HandName.fullHouse;
       }
     }
-    if (_isPoker()) {
+    if (this.cards.map((card) => card.suit).toList().toSet().length == 1 && this.cards.every((card) => card.rank >= 10)) {
       return HandName.poker;
     }
     return HandName.none;
   }
 
   int getRepeatedRanksMaxIndex() {
-    if (_hasRepeatedElements()) {
+    var repeatedRanks = _getRepeatedRanks(_getRanks());
+    if (repeatedRanks.length > 0) {
       if (getHandScoreName() != HandName.fullHouse) {
-        return _getRepeatedRanks(_getRanks()).reduce(max);
-      } else return _getRepeatedRanks(_getRanks())[0];
+        return repeatedRanks.reduce(max);
+      } else return repeatedRanks[0];
     }
     return 0;
   }
