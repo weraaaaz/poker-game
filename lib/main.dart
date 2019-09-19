@@ -9,13 +9,11 @@ import 'store.dart';
 void main() {
   final Store<AppState> store = getStore();
   runApp(MyApp(store));
-  //startGame(store);
 }
 
 class MyApp extends StatelessWidget {
   final Store<AppState> store; 
   MyApp(this.store);
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return StoreProvider<AppState>(

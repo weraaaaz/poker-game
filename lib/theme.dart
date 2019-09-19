@@ -22,7 +22,7 @@ class AppTheme {
   final primaryGreen = Color(0xffa0cc78);
   final primaryRed = Color(0xffda4302);
   final black = Color(0xff000000);
-  final white =Color(0xffffffff);
+  final white = Color(0xffffffff);
 
   TextStyle cardSuitBlack;
   TextStyle cardSuitRed;

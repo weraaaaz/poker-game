@@ -5,26 +5,36 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-// import 'package:flutter/material.dart';
-// import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
-// import 'package:pokergame/main.dart';
+import 'package:pokergame/main.dart';
+import 'package:pokergame/screens/game.dart';
+import 'package:pokergame/store.dart';
+import 'package:redux/redux.dart';
 
 void main() {
-  // testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-  //   // Build our app and trigger a frame.
-  //   await tester.pumpWidget(MyApp());
+  testWidgets('Starts game', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    final Store<AppState> store = getStore();
+    await tester.pumpWidget(MyApp(store));
 
-  //   // Verify that our counter starts at 0.
-  //   expect(find.text('0'), findsOneWidget);
-  //   expect(find.text('1'), findsNothing);
+    final newGameButtonFinder = find.text('New game');
+    // Verify that there is button 'New game'
+    expect(newGameButtonFinder, findsOneWidget);
+    expect(find.text('Winner'), findsNothing);
 
-  //   // Tap the '+' icon and trigger a frame.
-  //   await tester.tap(find.byIcon(Icons.add));
-  //   await tester.pump();
+    // Tap the 'New game' button and trigger a frame.
+    await tester.tap(newGameButtonFinder);
+    await tester.pump();
 
-  //   // Verify that our counter has incremented.
-  //   expect(find.text('0'), findsNothing);
-  //   expect(find.text('1'), findsOneWidget);
-  // });
+    // await tester.pumpWidget(GamePage());
+    // // Verify that there is no button 'New game'
+    // expect(newGameButtonFinder, findsNothing);
+    // final showCardsButtonFinder = find.text('Show cards');
+    // // Verify that there is button 'Show cards'
+    // expect(showCardsButtonFinder, findsOneWidget);
+    // // Verify that there is Player 1 text, not Player 2
+    // expect(find.text('Player 1'), findsOneWidget);
+    // expect(find.text('Player 2'), findsNothing);
+  });
 }

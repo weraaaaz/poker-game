@@ -4,12 +4,18 @@ import 'package:pokergame/models/models.dart';
 import 'package:pokergame/theme.dart';
 
 class CardWidget extends StatelessWidget {
+  /// rank of the card (int)
   final int rank;
+  /// suit of the card
   final Suit suit;
+  /// called on press
   final Function onPressed;
+  /// true if suit and rank should be visible
   final bool isVisible;
+  /// true if card is selected for swapping
   final bool isHighlighted;
 
+  /// Creates card widget
   const CardWidget({
     @required this.rank,
     @required this.suit,

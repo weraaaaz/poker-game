@@ -22,8 +22,6 @@ class AppState {
     this.cardsToSwap
   });
 
-  //factory AppState.initial() => AppState(deck: DeckModel.initial(), player1: Player(hand: Hand.initial(), isCurrentPlayer: true), player2: Player.initial());
-
   AppState copyWith({
     DeckModel deck,
     Player player1,
