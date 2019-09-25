@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:pokergame/widgets/card.dart';
 
-import '../store.dart';
-import '../theme.dart';
-import '../actions/actions.dart';
+import 'package:pokergame/actions/actions.dart';
+import 'package:pokergame/models/appState.dart';
+import 'package:pokergame/theme.dart';
+import 'package:pokergame/widgets/card.dart';
 
 class GamePage extends StatefulWidget {
   @override
@@ -39,7 +39,9 @@ class _GamePageState extends State<GamePage> {
                     return CardWidget(
                       rank: card.rank,
                       suit: card.suit,
-                      onPressed: areCardsVisible && canSwapCards ? () { dispatch(ToggleSelectCard(card)); } : () {},
+                      onPressed: areCardsVisible && canSwapCards ? () {
+                        dispatch(ToggleSelectCard(card));
+                      } : () {},
                       isVisible: areCardsVisible,
                       isHighlighted: cardsToSwap.contains(card)
                     );

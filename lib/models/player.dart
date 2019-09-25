@@ -26,6 +26,5 @@ class Player {
       name: name ?? this.name
     );
   }
-
 }
 

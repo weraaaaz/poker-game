@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   AppTheme(){
-
     cardSuitBlack = TextStyle(
       fontSize: 25,
       color: black,

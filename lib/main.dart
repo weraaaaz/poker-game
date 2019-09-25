@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
-import 'screens/game.dart';
-import 'screens/start.dart';
-import 'store.dart';
+import 'package:pokergame/store.dart';
+import 'package:pokergame/screens/start.dart';
+import 'package:pokergame/screens/game.dart';
+import 'package:pokergame/models/appState.dart';
 
 void main() {
   final Store<AppState> store = getStore();

@@ -8,7 +8,7 @@
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:pokergame/main.dart';
-import 'package:pokergame/screens/game.dart';
+import 'package:pokergame/models/models.dart';
 import 'package:pokergame/store.dart';
 import 'package:redux/redux.dart';
 

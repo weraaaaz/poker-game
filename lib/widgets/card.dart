@@ -28,6 +28,7 @@ class CardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var suitIcon;
     var suitIconStyle = appTheme.cardSuitBlack;
+
     switch (this.suit){
       case Suit.hearts:
         suitIcon = '\u2665';
@@ -43,6 +44,7 @@ class CardWidget extends StatelessWidget {
       default:
         suitIcon = '\u2660';
     }
+
     return Card(
       margin: const EdgeInsets.all(5),
       shape: isHighlighted ? RoundedRectangleBorder(

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:pokergame/widgets/card.dart';
 
-import '../store.dart';
-import '../theme.dart';
-import '../actions/actions.dart';
+import 'package:pokergame/actions/actions.dart';
+import 'package:pokergame/models/appState.dart';
+import 'package:pokergame/theme.dart';
+import 'package:pokergame/widgets/card.dart';
 
 class StartPage extends StatelessWidget {
   @override
